@@ -5,12 +5,12 @@
 - Python
 - Selenium
 ## Гайд
-В auto.py ищете где вписать пароль и почту и пишите.
+В auto.py ищете где вписать пароль и почту и пишите вместо `***`.
 ```python
 driver.find_element(By.ID, "loginform-username").send_keys("***") #почта
 driver.find_element(By.ID, "loginform-password").send_keys("***") #пароль
 ```
-Замените строчку с сайтом на необходимую книгу:
+Замените строчку с сайтом на необходимую книгу в `driver.get("")`:
 ```python
 driver.get("https://znanium.ru/read?id=******")
 ```
