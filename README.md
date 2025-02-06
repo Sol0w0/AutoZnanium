@@ -5,25 +5,27 @@
 - Python
 - Selenium
 ## Гайд
-В auto.py ищете где вписать пароль и почту и пишите вместо `***`.
+В main.py ищете где вписать пароль и почту и пишите вместо `***`.
 ```python
-driver.find_element(By.ID, "loginform-username").send_keys("***") #почта
-driver.find_element(By.ID, "loginform-password").send_keys("***") #пароль
+driver.find_element(By.ID, "loginform-username").send_keys("***") #Почта
+driver.find_element(By.ID, "loginform-password").send_keys("***") #Пароль
 ```
 Замените строчку с сайтом на необходимую книгу в `driver.get("")`:
 ```python
 driver.get("https://znanium.ru/read?id=******")
 ```
-При желании, можно заменить веб драйвер на Firefox, убрав перед этим options. **В Firefox не работает headless, соответственно** :
+Можно выбрать WebDriver:
 ```python
-with webdriver.Chrome(options=options) as driver:
-with webdriver.Firefox() as driver:
+with openChrome() as driver:
+#Или
+with openFirefox() as driver:
 ```
-Также (используя ChromeDriver), можно включить/выключить показ окна браузера:
+Можно включить/выключить показ окна браузера:
 ```python
-options.add_argument("--headless=new")
+options.add_argument("--headless=new") #Chrome
+options.add_argument("-headless") #Firefox
 ```
-После, запускается скрипт. Он работает **бесконечно** (или пока сайт не сдохнет). Можно спокойно заменить `while True` на `for i in range(n)`, как удобно
+После, запускается скрипт. Можно выйти из скрипта в любой момент нажав Enter.
 ## Примечания
 - При множественных одновременных заходах на сайт, сайт отправит вас в тайм аут при попытке захода. За время использования этого не было замечено, но все может быть.
 - Если во время работы скрипта зайти на любую другую книгу, то время отката между открытем книги собъется, и сайт *возможно* не засчитает следущий заход. *Возможно*.
