@@ -57,4 +57,3 @@ with openChrome() as driver:
             time.sleep(3)  
     except:
         print("Программа остановлена по неизвестной причине")
-        
