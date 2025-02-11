@@ -5,15 +5,13 @@
 - Python
 - Selenium
 ## Гайд
-В main.py ищете где вписать пароль и почту и пишите вместо `***`.
+В main.py ищете где вписать пароль, почту и ссылку на книгу и пишите вместо `***` подходящие значения:
 ```python
-driver.find_element(By.ID, "loginform-username").send_keys("***") #Почта
-driver.find_element(By.ID, "loginform-password").send_keys("***") #Пароль
+mail = "***"
+password = "***"
+link = "https://znanium.ru/read?id=******"
 ```
-Замените строчку с сайтом на необходимую книгу в `driver.get("")`:
-```python
-driver.get("https://znanium.ru/read?id=******")
-```
+
 Можно выбрать WebDriver:
 ```python
 with openChrome() as driver:

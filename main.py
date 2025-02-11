@@ -7,18 +7,25 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options as firefoxOptions
 from selenium.webdriver.chrome.options import Options as chromeOptions
+
+mail = "***"
+password = "***"
+link = "https://znanium.ru/read?id=******"
        
 def openFirefox():
     options = firefoxOptions()
     options.add_argument("-headless")
-    return webdriver.Firefox(options=options).maximize_window()
+    driver = webdriver.Firefox(options=options)
+    driver.maximize_window()
+    return driver
     
 def openChrome():
     options = chromeOptions()
     options.add_argument('--start-maximized')
     options.add_argument("--log-level=3")  
     options.add_argument("--headless=new")
-    return webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options)
+    return driver
     
 def fastExit():
     input("Чтобы выйти из программы нажмите Enter\n")
@@ -30,18 +37,18 @@ def fastExit():
 thread = threading.Thread(target=fastExit, daemon=True)
 thread.start()
  
-with openChrome() as driver:
+with openFirefox() as driver:
     driver.get("https://znanium.ru/site/login")
     print("Открыт сайт логина")
-    driver.find_element(By.ID, "loginform-username").send_keys("***") #Почта
-    driver.find_element(By.ID, "loginform-password").send_keys("***") #Пароль
+    driver.find_element(By.ID, "loginform-username").send_keys(mail) 
+    driver.find_element(By.ID, "loginform-password").send_keys(password)
     driver.find_element(By.ID, "loginform-password").send_keys(Keys.RETURN)
     print("Получен доступ к аккаунту")
     time.sleep(1)
     att = 0
     try:
         while True:
-            driver.get("https://znanium.ru/read?id=******")
+            driver.get(link)
             time.sleep(5)
             try:
                 page = driver.find_element(By.ID,"page")
