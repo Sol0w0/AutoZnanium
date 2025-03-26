@@ -15,6 +15,13 @@ link = "https://znanium.ru/read?id=******"
 def openFirefox():
     options = firefoxOptions()
     options.add_argument("-headless")
+    options.set_preference("media.peerconnection.enabled", False)
+    options.set_preference("permissions.default.image", 2)
+    options.set_preference("browser.cache.disk.enable", False)
+    options.set_preference("dom.ipc.processCount", 1)
+    options.set_preference("browser.cache.memory.enable", False)
+    options.set_preference("javascript.enabled", False)
+    options.set_preference("toolkit.telemetry.enabled", False)
     driver = webdriver.Firefox(options=options)
     driver.maximize_window()
     return driver
@@ -22,8 +29,15 @@ def openFirefox():
 def openChrome():
     options = chromeOptions()
     options.add_argument('--start-maximized')
-    options.add_argument("--log-level=3")  
     options.add_argument("--headless=new")
+    options.add_argument("--log-level=3")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-software-rasterizer")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--blink-settings=imagesEnabled=false")
+    options.add_argument("--mute-audio")
     driver = webdriver.Chrome(options=options)
     return driver
     
@@ -44,7 +58,7 @@ with openFirefox() as driver:
     driver.find_element(By.ID, "loginform-password").send_keys(password)
     driver.find_element(By.ID, "loginform-password").send_keys(Keys.RETURN)
     print("Получен доступ к аккаунту")
-    time.sleep(1)
+    time.sleep(5)
     att = 0
     try:
         while True:
